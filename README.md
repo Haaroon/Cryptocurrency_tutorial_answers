@@ -7,3 +7,5 @@ This repo has the answers
 * [Tutorial 1](https://blockchain.kcl.ac.uk/cryptocurrencyclass/tutorials/tutorial1.pdf)
 * [Tutorial 2](https://blockchain.kcl.ac.uk/cryptocurrencyclass/tutorials/tutorial2.pdf)
 * [Tutorial 3](https://blockchain.kcl.ac.uk/cryptocurrencyclass/tutorials/tutorial3.pdf)
+
+In tutorial 3 section 4.3 code is vulnerable to reentrancy attack. 
