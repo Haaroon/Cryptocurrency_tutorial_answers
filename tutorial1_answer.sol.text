@@ -8,7 +8,7 @@ contract HelloWorld
     string lastMessage;
     address latestAddress;
     
-    function hello() public returns (string memory) 
+    function hello() public 
     {
         emit Message(lastMessage);
     }
