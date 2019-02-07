@@ -1,0 +1,27 @@
+pragma solidity >=0.4.22 <0.6.0;
+
+contract DepositAndRefund 
+{
+    mapping(address => uint256) private addressmap;
+    
+    function getBalance(address party) public view returns (uint256)
+    {
+        return addressmap[party];
+    }
+    
+    function withdraw(uint amount) public payable
+    {
+        require(addressmap[msg.sender] >= amount);
+        uint bal = addressmap[msg.sender];
+        bal = bal - amount;
+        addressmap[msg.sender] = bal;
+        msg.sender.transfer(amount);
+    }
+    
+    function deposit() public payable
+    {
+        require(msg.sender.balance >= msg.value);
+        addressmap[msg.sender] += msg.value;
+        assert(msg.sender.balance >= 0);
+    }
+}

@@ -1,0 +1,32 @@
+pragma solidity >=0.4.22 <0.6.0;
+
+contract HelloWorld 
+{
+    mapping(address => string[]) private messagemap; 
+    event Message(string);
+    string[] messagelog; 
+    string lastMessage;
+    address latestAddress;
+    
+    function hello() public returns (string memory) 
+    {
+        emit Message(lastMessage);
+    }
+    
+    function updateMessage(string memory mes) public
+    {
+        lastMessage = mes;
+        latestAddress = msg.sender;
+        messagemap[msg.sender].push(mes);
+    }
+    
+    function getMessage(address user, uint i) public view returns (string memory)
+    {
+        return messagemap[user][i]; 
+    }
+    
+    function latestMessage() public view returns (string memory, address)
+    {
+        return (lastMessage, latestAddress);
+    }
+}

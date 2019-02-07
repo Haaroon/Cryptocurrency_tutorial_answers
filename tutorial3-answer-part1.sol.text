@@ -1,0 +1,53 @@
+pragma solidity ^0.5.1;
+
+contract FootballOracle 
+{
+    address owner;
+    constructor() public
+    {
+        owner = msg.sender;
+    }
+
+    struct FootballResult {
+        bool success;
+        uint score1;
+        uint score2;
+        uint blocktime;
+    }   
+    
+    mapping(uint => FootballResult) scores;
+    uint expiryTime = 12 * 5; //1 block is 12 seconds so delete after 5 blocks
+    
+    function getScore(uint matchid) public view returns (bool success, uint score1, uint score2){
+        // if( (scores[matchid].blocktime + expiryTime) >= block.number) {
+        //     delete scores[matchid];
+        // }
+        // else {
+        return (scores[matchid].success,scores[matchid].score1, scores[matchid].score2);    
+        //}
+    }
+    
+    function sendScore(uint matchid, bool success, uint score1, uint score2) public payable
+    {
+        require(msg.sender == owner);
+        FootballResult memory newResult = FootballResult(success, score1, score2, block.number);
+        scores[matchid] = newResult;
+    }
+}
+
+contract EmitMatchEvent {
+    event MatchScore(uint matchid, uint score1, uint score2);
+    FootballOracle public oracle; 
+    
+    constructor(address _oracle) public {
+        oracle = FootballOracle(_oracle);
+    }
+    
+    function checkScore(uint _matchid) public {
+        bool success; uint score1; uint score2;
+        (success, score1, score2) = oracle.getScore(_matchid);
+        if(success){
+            emit MatchScore(_matchid, score1, score2);
+        }
+    }
+}

