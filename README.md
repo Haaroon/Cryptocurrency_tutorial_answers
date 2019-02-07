@@ -1,6 +1,6 @@
 # Cryptocurrency_tutorial_answers
 
-Tutorials courtesy of [Patrick McCory](https://nms.kcl.ac.uk/patrick.mccorry/) from his [7CCSMDLC Cryptocurrency Class 2019 at KCL](https://blockchain.kcl.ac.uk/cryptocurrencyclass/).
+Tutorials courtesy of [Patrick McCorry](https://nms.kcl.ac.uk/patrick.mccorry/) from his [7CCSMDLC Cryptocurrency Class 2019 at KCL](https://blockchain.kcl.ac.uk/cryptocurrencyclass/).
 
 This repo has the answers
 
@@ -8,4 +8,4 @@ This repo has the answers
 * [Tutorial 2](https://blockchain.kcl.ac.uk/cryptocurrencyclass/tutorials/tutorial2.pdf)
 * [Tutorial 3](https://blockchain.kcl.ac.uk/cryptocurrencyclass/tutorials/tutorial3.pdf)
 
-In tutorial 3 section 4.3 code is vulnerable to reentrancy attack, at present this code is not recursive so only drains the 1 ETH from the user at a time. 
+In tutorial 3 section 4.3 code is vulnerable to reentrancy attack.
